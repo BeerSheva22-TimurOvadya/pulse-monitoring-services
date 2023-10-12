@@ -2,7 +2,6 @@ package telran.monitoring;
 
 import java.util.function.Consumer;
 
-
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,24 +23,26 @@ public class AvgValuesReducerAppl {
 	final StreamBridge streamBridge;
 	@Value("${app.avg.binding.name:avg-reducer-out-0}")
 	String bindingName;
+
 	public static void main(String[] args) {
 		SpringApplication.run(AvgValuesReducerAppl.class, args);
-
 	}
+
 	@Bean
 	Consumer<PulseProbe> pulseProbeConsumer() {
 		return this::processPulseProbe;
 	}
+
 	void processPulseProbe(PulseProbe probe) {
 		long patientId = probe.patientId();
 		Integer avgValue = service.reduce(probe);
 		if (avgValue != null) {
 			log.debug("for patient {} avg value is {}", patientId, avgValue);
-			streamBridge.send(bindingName, new PulseProbe(patientId,avgValue, System.currentTimeMillis(), 0));
+			streamBridge.send(bindingName, new PulseProbe(patientId, avgValue, System.currentTimeMillis(), 0));
 		} else {
 			log.trace("for patient {} no avg value yet", patientId);
 		}
-		
+
 	}
-	
+
 }

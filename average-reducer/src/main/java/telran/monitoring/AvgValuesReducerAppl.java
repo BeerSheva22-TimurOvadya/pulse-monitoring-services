@@ -2,8 +2,7 @@ package telran.monitoring;
 
 import java.util.function.Consumer;
 
-import org.slf4j.*;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

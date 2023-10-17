@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import telran.monitoring.dto.PulseProbe;
 
-@Document(collection = "documents")
+//@Document(collection = "documents")
 @Data
 @AllArgsConstructor 
 public class AvgPulseDoc {

@@ -19,6 +19,10 @@ public class BackOfficeServiceImpl implements BackOfficeService {
     @Override
     public int getAvgValue(long patientId, LocalDateTime from, LocalDateTime to) {        
         List<AvgPulseDoc> docs = repository.findByPatientIdAndDateTimeBetween(patientId, from, to);
+        if (docs.isEmpty()) {
+            log.debug("No documents found for patientId: {}. Returning average value of 0.", patientId);
+            return 0;
+        }
         int avgValue = docs.stream().mapToInt(AvgPulseDoc::getValue).sum() / docs.size();
         log.debug("Average value calculated: {}", avgValue);
         return avgValue;

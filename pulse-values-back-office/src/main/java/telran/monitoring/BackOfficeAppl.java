@@ -2,12 +2,14 @@ package telran.monitoring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-public class EmailDataProviderAppl {
+@ComponentScan(basePackages = { "telran" })
+public class BackOfficeAppl {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EmailDataProviderAppl.class, args);
+		SpringApplication.run(BackOfficeAppl.class, args);
 
 	}
 

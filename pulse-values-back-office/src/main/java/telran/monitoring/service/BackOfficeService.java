@@ -1,0 +1,10 @@
+package telran.monitoring.service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+public interface BackOfficeService {
+    int getAvgValue(long patientId, LocalDateTime from, LocalDateTime to);
+    int getMaxValue(long patientId, LocalDateTime from, LocalDateTime to);
+    List<Integer> getAllValues(long patientId, LocalDateTime from, LocalDateTime to);
+}

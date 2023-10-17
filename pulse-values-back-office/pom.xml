@@ -5,27 +5,22 @@
     <artifactId>pulse-monitoring-services</artifactId>
     <version>0.0.1</version>
   </parent>
-  <artifactId>email-data-provider</artifactId>
-  <dependencies>
-	  <dependency>
-		  <groupId>
-			  org.springframework.boot
-		  </groupId>
-		  <artifactId>spring-boot-starter-web</artifactId>
-	  </dependency>
-	  <dependency>
+  <artifactId>pulse-values-back-office</artifactId>
+  
+   <dependencies>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+			<groupId>de.flapdoodle.embed</groupId>
+			<artifactId>de.flapdoodle.embed.mongo.spring30x</artifactId>
+			<version>4.5.2</version>
 			<scope>test</scope>
 		</dependency>
-  </dependencies>
+	</dependencies>
 </project>

@@ -1,13 +1,14 @@
 package telran.monitoring.entities;
 
-import lombok.Data;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "patients")
-@Data
-public class Patient {
-	@Id
-	long id;	
-	String name;
+@NoArgsConstructor
+
+public class Patient extends Person {
+	public Patient(long id, String email, String name) {
+		super(id, email, name);
+	}
+
 }

@@ -3,6 +3,8 @@ package telran.monitoring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import lombok.extern.slf4j.Slf4j;
 import telran.monitoring.service.BackOfficeService;
 import java.time.LocalDateTime;
 import java.util.List;

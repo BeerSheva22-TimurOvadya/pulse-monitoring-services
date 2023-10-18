@@ -2,15 +2,15 @@ package telran.monitoring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.cloud.config.server.EnableConfigServer;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "telran" })
-public class PulseValuesAppl {
+@EnableConfigServer
+public class ConfigServerAppl {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PulseValuesAppl.class, args);
+		SpringApplication.run(ConfigServerAppl.class, args);
 
 	}
-	
+
 }

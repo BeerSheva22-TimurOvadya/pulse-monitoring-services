@@ -76,7 +76,7 @@ public class AvgValuesServiceTest {
 		assertEquals(VALUE4, avgValuesService.getMaxValue(PATIENT_ID_1, LocalDateTime.now().minusHours(10),
 				LocalDateTime.now().plusHours(10)));
 	}
-
+	
 	@Test
 	void allValuesTest() {
 		List<Integer> values = avgValuesService.getAllValues(PATIENT_ID, LocalDateTime.now().minusHours(10),

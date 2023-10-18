@@ -13,25 +13,27 @@ import java.util.stream.Collectors;
 @Slf4j
 public class BackOfficeServiceImpl implements BackOfficeService {
 
-    @Autowired
+	@Autowired
     AvgPulseRepository repository;
 
     @Override
-    public int getAvgValue(long patientId, LocalDateTime from, LocalDateTime to) {        
-        List<AvgPulseDoc> docs = repository.findByPatientIdAndDateTimeBetween(patientId, from, to);
-        if (docs.isEmpty()) {
+    public int getAvgValue(long patientId, LocalDateTime from, LocalDateTime to) {
+        Double avgValue = repository.getAverageValue(patientId, from, to);
+        if (avgValue == null) {
             log.debug("No documents found for patientId: {}. Returning average value of 0.", patientId);
             return 0;
         }
-        int avgValue = docs.stream().mapToInt(AvgPulseDoc::getValue).sum() / docs.size();
         log.debug("Average value calculated: {}", avgValue);
-        return avgValue;
+        return avgValue.intValue();
     }
 
     @Override
-    public int getMaxValue(long patientId, LocalDateTime from, LocalDateTime to) {       
-        int maxValue = repository.findByPatientIdAndDateTimeBetween(patientId, from, to)
-                         .stream().mapToInt(AvgPulseDoc::getValue).max().orElse(0);
+    public int getMaxValue(long patientId, LocalDateTime from, LocalDateTime to) {
+        Integer maxValue = repository.getMaxValue(patientId, from, to);
+        if (maxValue == null) {
+            log.debug("No documents found for patientId: {}. Returning max value of 0.", patientId);
+            return 0;
+        }
         log.debug("Max value found: {}", maxValue);
         return maxValue;
     }

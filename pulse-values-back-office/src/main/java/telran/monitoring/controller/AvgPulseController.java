@@ -65,7 +65,6 @@ public class AvgPulseController {
 		LocalDateTime from = fromDateTime == null ? LocalDateTime.of(1000, 1, 1, 0, 0)
 				: LocalDateTime.parse(fromDateTime);
 		LocalDateTime to = toDateTime == null ? LocalDateTime.of(10000, 1, 1, 0, 0) : LocalDateTime.parse(toDateTime);
-
 		return service.getAllValues(patientId, from, to);
 
 	}

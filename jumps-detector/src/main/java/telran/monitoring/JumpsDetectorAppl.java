@@ -19,7 +19,7 @@ import telran.monitoring.service.JumpsDetectorService;
 public class JumpsDetectorAppl {
 	final StreamBridge streamBridge;
 	final JumpsDetectorService jumpsService;
-	@Value("${app.jumps.binding.name:jumps-out-0}")
+	@Value("${app.jumps.binding.name}")
 	String jumpsBindingName;
 
 	public static void main(String[] args) {
@@ -28,7 +28,7 @@ public class JumpsDetectorAppl {
 	}
 
 	@Bean
-	Consumer<PulseProbe> pulseProbeConsumer() {
+	Consumer<PulseProbe> pulseProbeConsumerJumps() {
 		return this::probeConsumer;
 	}
 

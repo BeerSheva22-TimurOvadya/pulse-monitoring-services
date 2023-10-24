@@ -13,7 +13,9 @@ public class ProbesList {
 
 	public ProbesList(long patientId) {
 		this.patientId = patientId;
-	}	
+	}
+
+	
 
 	public long getPatientId() {
 		return patientId;

@@ -6,9 +6,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class DataProviderConfig {
-	@Bean
-	RestTemplate getRestTemplate() {
-		return new RestTemplate();
-	}
-
+@Bean
+RestTemplate getRestTemplate() {
+	return new RestTemplate();
+}
 }

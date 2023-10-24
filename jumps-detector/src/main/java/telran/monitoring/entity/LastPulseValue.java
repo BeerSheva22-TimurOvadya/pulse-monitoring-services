@@ -11,7 +11,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class LastPulseValue {
 	@Id
-	long patientId;	
+	long patientId;
 	int value;
-	
+	long timestamp;
+
 }

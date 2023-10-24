@@ -1,5 +1,6 @@
 package telran.monitoring.service;
 
+import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -22,7 +23,6 @@ public class EmailDataProviderImpl implements EmailDataProvider {
 	String host;
 	@Value("${app.email.provider.port:8080}")
 	int port;
-
 	@Override
 	public EmailNotificationData getData(long patientId) {
 		String url = getUrl(patientId);
@@ -30,7 +30,7 @@ public class EmailDataProviderImpl implements EmailDataProvider {
 		EmailNotificationData res = null;
 		try {
 			ResponseEntity<EmailNotificationData> responseEntity =
-					restTemplate.exchange(url, HttpMethod.GET, null, 
+					restTemplate.exchange(url, HttpMethod.GET, null,
 							EmailNotificationData.class);
 			res = responseEntity.getBody();
 		} catch (Exception e) {
@@ -38,10 +38,9 @@ public class EmailDataProviderImpl implements EmailDataProvider {
 		}
 		return res;
 	}
-
 	private String getUrl(long patientId) {
 		
-		return String.format("http://%s:%d/%s/%d", host, port, urlApi, patientId);
+		return String.format("http://%s:%d/%s/%d", host,port,urlApi,patientId);
 	}
 
 }

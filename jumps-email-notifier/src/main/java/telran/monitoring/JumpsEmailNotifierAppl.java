@@ -1,7 +1,10 @@
 package telran.monitoring;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.function.Consumer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,9 +22,10 @@ import telran.monitoring.service.EmailDataProvider;
 @RequiredArgsConstructor
 @Slf4j
 public class JumpsEmailNotifierAppl {
-	final JavaMailSender mailSender;
+	@Autowired
+	JavaMailSender mailSender;
 	final EmailDataProvider dataProvider;
-	@Value("${app.email.service.address:hospitalservice@hospital.com}")
+	@Value("${app.email.service.address:qwerty12345@mail.com}")
 	private String hospitalServiceMail;
 	@Value("${app.email.service.name:Hospital Alert Service}")
 	private String hospitalServiceName;
@@ -30,8 +34,8 @@ public class JumpsEmailNotifierAppl {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JumpsEmailNotifierAppl.class, args);
-
 	}
+
 	@Bean
 	Consumer<JumpPulse> jumpsConsumer() {
 		return this::jumpProcessing;
@@ -43,12 +47,14 @@ public class JumpsEmailNotifierAppl {
 	}
 
 	private void sendMail(JumpPulse jumpPulse) {
+
 		EmailNotificationData data = dataProvider.getData(jumpPulse.patientId());
 		if (data == null) {
 			log.warn("email data have not been received");
 			data = new EmailNotificationData(hospitalServiceMail, hospitalServiceName, "" + jumpPulse.patientId());
 		}
-		log.trace("email data: doctor email: {}, doctor name: {}, patient name: {}", data.doctorMail(), data.doctorName(), data.patientName());
+		log.trace("email data: doctor email: {}, doctor name: {}, patient name: {}", data.doctorMail(),
+				data.doctorName(), data.patientName());
 		SimpleMailMessage smm = new SimpleMailMessage();
 		smm.setTo(data.doctorMail());
 		smm.setSubject(subject + jumpPulse.patientId());
@@ -59,11 +65,13 @@ public class JumpsEmailNotifierAppl {
 
 	}
 
-	private String getText(JumpPulse jumpPulse, EmailNotificationData data) {		
-		return String.format("Dear %s\nYour patient %s has the pulse jump\n"
-		+ "previous value: %d\n"
-				+ "current value: %d\n", data.doctorName(), data.patientName(), 
-				jumpPulse.prevValue(), jumpPulse.currentValue());
+	private String getText(JumpPulse jumpPulse, EmailNotificationData data) {
+		return String.format(
+				"Dear %s\nYour patient %s has the pulse jump %s\n" + "previous value: %d\n" + "current value: %d\n",
+				data.doctorName(), data.patientName(),
+				LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm")),
+				jumpPulse.prevValue(),
+				jumpPulse.currentValue());
 	}
 
 }

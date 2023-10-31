@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.mvc.ProxyExchange;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ public class ProxyServiceImpl implements ProxyService {
 	@Override
 	public ResponseEntity<byte[]> proxyRouting(ProxyExchange<byte[]> proxy, HttpServletRequest request) {
 		String routedURI = getRoutedURI(request); 
-		log.trace("routed UTI {}", routedURI);
+		log.trace("routed URI {}", routedURI);
 		return proxy.uri(routedURI).get();
 	}
 

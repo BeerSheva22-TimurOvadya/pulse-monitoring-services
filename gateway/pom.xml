@@ -14,9 +14,15 @@
 		</dependency>
 		<dependency>
 			<groupId>telran.spring</groupId>
+			<artifactId>jwt-authentication</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>telran.spring</groupId>
 			<artifactId>web-exceptions-handler</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+
 	</dependencies>
 	<artifactId>gateway</artifactId>
 </project>

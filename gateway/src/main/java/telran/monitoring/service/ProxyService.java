@@ -1,7 +1,7 @@
 package telran.monitoring.service;
 
 import org.springframework.cloud.gateway.mvc.ProxyExchange;
-import org.springframework.http.HttpMethod;
+
 import org.springframework.http.ResponseEntity;
 
 import jakarta.servlet.http.HttpServletRequest;
